@@ -1,0 +1,29 @@
+language: ruby
+
+install:
+  - bundle install
+
+script:
+  - bundle exec jekyll build
+
+# Blocklist
+branches:
+  except:
+    - master
+
+# Safelist
+branches:
+  only:
+  - develop
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: false
+  local-dir: _site
+  target-branch: master
+  on:
+    branch: develop
+
+sudo: false
